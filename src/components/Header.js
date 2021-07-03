@@ -17,6 +17,7 @@ const Header = (props) => {
             .then((response)=>{ 
             // console.log(response.data);
             dispatch(setInfo(response.data))
+            setinputvalue('');
             })
             .catch((error)=>{
                 console.log(error);
