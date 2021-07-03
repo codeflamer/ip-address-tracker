@@ -1,47 +1,63 @@
 import React from 'react'
-import styled from 'styled-components'
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { getDetails } from '../features/counter/addressSlice';
 
-const Details = () => {
-    return (
-        <Container>
-            <AbsoluteContainer>
-            <Contents>
-                <Content1>
-                    <TitleDetail>
-                        <span>Ip address</span>
-                    </TitleDetail>
-                    <IpInfo>
-                        192.212.174.101
-                    </IpInfo>
-                </Content1>
-                <Content2>
-                    <TitleDetail>
-                        <span>Location</span>
-                    </TitleDetail>
-                    <IpInfo>
-                        Brooklyn,NY 10001
-                    </IpInfo>
-                </Content2>
-                <Content3>
-                    <TitleDetail>
-                        <span>timezone</span>
-                    </TitleDetail>
-                    <IpInfo>
-                        UTC-05:00
-                    </IpInfo>   
-                </Content3>
-                <Content4>
-                    <TitleDetail>
-                        <span>Isp</span>
-                    </TitleDetail>
-                    <IpInfo>
-                        SpaceX Starlink
-                    </IpInfo>
-                </Content4>
-            </Contents>
-            </AbsoluteContainer>
-        </Container>
-    )
+const Details = ({info}) => {
+
+    const detail = useSelector(getDetails);
+    console.log(detail);
+    if(detail){
+        return (
+            <Container>
+                <AbsoluteContainer>
+                <Contents>
+                    <Content1>
+                        <TitleDetail>
+                            <span>Ip address</span>
+                        </TitleDetail>
+                        <IpInfo>
+                            {detail.ip}
+                        </IpInfo>
+                    </Content1>
+                    <Content2>
+                        <TitleDetail>
+                            <span>Location</span>
+                        </TitleDetail>
+                        <IpInfo>
+                            {/* Brooklyn,NY 10001 */}
+                            {detail.location.city},{detail.location.country} {detail.location.geonameId}
+                        </IpInfo>
+                    </Content2>
+                    <Content3>
+                        <TitleDetail>
+                            <span>timezone</span>
+                        </TitleDetail>
+                        <IpInfo>
+                            UTC
+                            {/* 05:00 */}
+                            {detail.location.timezone}
+                        </IpInfo>   
+                    </Content3>
+                    <Content4>
+                        <TitleDetail>
+                            <span>Isp</span>
+                        </TitleDetail>
+                        <IpInfo>
+                            {/* SpaceX Starlink */}
+                            {detail.isp}
+                        </IpInfo>
+                    </Content4>
+                </Contents>
+                </AbsoluteContainer>
+            </Container>
+        )
+    }
+    else{
+        return <h3>Loading...</h3>
+    }
+
+    
 }
 
 const Container = styled.section`
@@ -65,7 +81,7 @@ const Contents = styled.div`
     // border:1px solid red;
     box-shadow:1px 4px 8px  hsl(0, 0%, 59%);
     width:100%;
-    max-width:1050px;
+    max-width:1080px;
     display:grid;
     grid-template-columns:repeat(4, 1fr);
     padding:30px 10px;

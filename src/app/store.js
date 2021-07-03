@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import addressReducer from '../features/counter/addressSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    Ipaddress: addressReducer,
   },
 });

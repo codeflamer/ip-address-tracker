@@ -1,7 +1,36 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { setInfo } from '../features/counter/addressSlice';
+import axios from 'axios';
 
-const Header = () => {
+
+const Header = (props) => {
+
+    const dispatch = useDispatch();
+    const [inputValue,setinputvalue] = useState('');
+
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
+        if(inputValue){
+            await axios.get(`https://geo.ipify.org/api/v1?apiKey=at_jE4GgLurH7g8KqaLsaYwkbFaQgNnr&ipAddress=${inputValue}`)
+            .then((response)=>{ 
+            // console.log(response.data);
+            dispatch(setInfo(response.data))
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+        }
+        else{
+            console.log('The input field is empty, Try putting in some valid ip Address');
+        }
+
+        
+    }
+    const formController =(e)=>{
+        setinputvalue(e.target.value);
+    }
     return (
         <Headers>
             <Container>
@@ -9,8 +38,8 @@ const Header = () => {
                     <h1>IP address tracker</h1>
                 </Content1>
                 <Content2>
-                    <form>
-                        <input type='text' placeholder='Search for any IP address or domain'/>
+                    <form onSubmit={(e)=> handleSubmit(e)}>
+                        <input type='text' value={inputValue} onChange={(e)=> formController(e)} placeholder='Search for any IP address or domain'/>
                         <button type='submit'><i class="fas fa-chevron-right"></i></button>
                     </form>
                 </Content2>
