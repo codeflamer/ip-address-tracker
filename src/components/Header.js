@@ -15,7 +15,6 @@ const Header = (props) => {
         if(inputValue){
             await axios.get(`https://geo.ipify.org/api/v1?apiKey=at_jE4GgLurH7g8KqaLsaYwkbFaQgNnr&ipAddress=${inputValue}`)
             .then((response)=>{ 
-            // console.log(response.data);
             dispatch(setInfo(response.data))
             setinputvalue('');
             })

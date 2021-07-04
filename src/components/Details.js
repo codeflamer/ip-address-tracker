@@ -6,7 +6,6 @@ import { getDetails } from '../features/counter/addressSlice';
 const Details = ({info}) => {
 
     const detail = useSelector(getDetails);
-    console.log(detail);
     if(detail){
         return (
             <Container>
@@ -54,7 +53,7 @@ const Details = ({info}) => {
         )
     }
     else{
-        return <h3>Loading...</h3>
+        return <h3>Loading Details...</h3>
     }
 
     
@@ -62,6 +61,7 @@ const Details = ({info}) => {
 
 const Container = styled.section`
 position:relative;
+z-index:2;
 `;
 const AbsoluteContainer = styled.div`
     position:absolute;

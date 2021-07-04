@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import Header from './components/Header'
 import Details from './components/Details'
-import Map from './components/Map'
+import MapA from './components/Map'
 import './App.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ const App = () => {
   let apiKey = 'a3c023b02f5a36267d3254ad6b588e513421259f1888e134fb783ca8';
   json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
     setMyIpAddress(data.ip);
-    console.log(myIpAddress);
+    // console.log(myIpAddress);
   });
 
   //
@@ -30,7 +30,7 @@ const App = () => {
   const getIPAddress = async()=>{
       await axios.get(`https://geo.ipify.org/api/v1?apiKey=at_jE4GgLurH7g8KqaLsaYwkbFaQgNnr&ipAddress=${myIpAddress}`)
       .then((response)=>{ 
-        // console.log(response.data);
+        // console.log(response.data.location);
         dispatch(setInfo(response.data))
       })
       .catch((error)=>{
@@ -46,7 +46,7 @@ const App = () => {
     <div>
       <Header/>
       <Details/>
-      <Map/>
+      <MapA/>
     </div>
   )
 }
